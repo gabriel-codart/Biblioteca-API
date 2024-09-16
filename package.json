@@ -14,7 +14,7 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^20.14.10",
-    "prisma": "^5.17.0",
+    "prisma": "^5.19.1",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3"
   },
@@ -22,7 +22,7 @@
     "@fastify/autoload": "^5.10.0",
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^4.0.0",
-    "@prisma/client": "^5.18.0",
+    "@prisma/client": "^5.19.1",
     "fastify": "^4.28.1",
     "tsc": "^2.0.4"
   }

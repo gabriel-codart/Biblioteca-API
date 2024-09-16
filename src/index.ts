@@ -1,6 +1,5 @@
 import Fastify from 'fastify';
 
-import { PrismaClient } from '@prisma/client';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import autoload from '@fastify/autoload';

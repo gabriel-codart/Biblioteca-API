@@ -1,54 +1,49 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { PrismaClient } from '@prisma/client';
+import { Aluno } from '../models/aluno';
 
-// Cliente Prisma
 const prisma = new PrismaClient();
 
-// Repositorio de Usuários
-let alunos = prisma.aluno;
-
-// Busca todos os Usuários
+// Busca todos os Alunos
 export const getAlunos = async (request: FastifyRequest, reply: FastifyReply) => {
-  let res = await alunos.findMany();
-  reply.send(res);
+  const alunos = await prisma.aluno.findMany({});
+  reply.send({ alunos });
 };
 
-// Busca Usuário pelo ID
+// Busca Aluno pelo ID
 export const getAlunoById = async (request: FastifyRequest, reply: FastifyReply) => {
-  const { id } = request.params as { id: number };
-  let res = await alunos.findFirst({
-    where: {
-      id: id
-    }
+  const { id } = request.params as { id: string };
+  const aluno = await prisma.aluno.findUnique({
+    where: { id: Number(id) },
   });
-
-  reply.send(res);
+  reply.send({ aluno });
 };
 
-// Cria Usuário
+// Cria Aluno
 export const createAluno = async (request: FastifyRequest, reply: FastifyReply) => {
-  const { name, email, password } = request.body as { name: string, email: string, password: string };
-
-  users.push(new User((users.length), name, email, password));
-  
-  reply.send(`User ${name} CREATED`);
+  const { matricula, nome, email } = request.body as { matricula: string, nome: string, email: string };
+  const aluno = await prisma.aluno.create({
+    data: { matricula, nome, email },
+  });
+  reply.send({ aluno });
 };
 
-// Atualiza Usuário
+// Atualiza Aluno
 export const updateAluno = async (request: FastifyRequest, reply: FastifyReply) => {
   const { id } = request.params as { id: string };
-  const { name, email, password } = request.body as { name: string, email: string, password: string };
-
-  users[Number(id)] = new User(Number(id), name, email, password);
-  
-  reply.send(`User ${id} UPDATED`);
+  const { matricula, nome, email } = request.body as { matricula: string, nome: string, email: string };
+  const aluno = await prisma.aluno.update({
+    where: { id: Number(id) },
+    data: { matricula, nome, email },
+  });
+  reply.send({ aluno });
 };
 
-// Deleta Usuário
+// Deleta Aluno
 export const deleteAluno = async (request: FastifyRequest, reply: FastifyReply) => {
   const { id } = request.params as { id: string };
-
-  users.splice(Number(id), 1);
-  
-  reply.send(`User ${id} DELETED`);
+  await prisma.aluno.delete({
+    where: { id: Number(id) },
+  });
+  reply.send(`Aluno ${id} DELETED`);
 };

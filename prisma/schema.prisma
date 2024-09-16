@@ -10,24 +10,39 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model Professor{
-  id Int @id @default(autoincrement())
-  email String @unique
-  nome String
-  disciplinas Disciplina[]
+model Aluno {
+  id        Int    @id @default(autoincrement())
+  matricula String @unique
+  nome      String
+  email     String @unique
+  emprestimos Emprestimo[]
 }
 
-model Aluno{
-  id Int @id @default(autoincrement())
-  email String @unique
-  nome String
-  disciplinas Disciplina[]
+model Livro {
+  id                Int    @id @default(autoincrement())
+  nome              String
+  autor             String
+  quantidadeDisponivel Int
+  emprestimos       Emprestimo[]
 }
 
-model Disciplina{
-  id Int @id @default(autoincrement())
-  nome String
-  professorId Int
-  professor Professor @relation(fields: [professorId], references: [id])
-  alunos Aluno[]
+model Emprestimo {
+  id        Int    @id @default(autoincrement())
+  alunoId   Int
+  livroId   Int
+  dataInicio DateTime
+  dataFim   DateTime
+  atrasado  Boolean @default(false)
+  aluno     Aluno @relation(fields: [alunoId], references: [id])
+  livro     Livro @relation(fields: [livroId], references: [id])
+  atrasos   Atraso[]
+}
+
+model Atraso {
+  id             Int    @id @default(autoincrement())
+  emprestimoId   Int
+  dataDevolucao  DateTime
+  valor          Float
+  pago           Boolean @default(false)
+  emprestimo     Emprestimo @relation(fields: [emprestimoId], references: [id])
 }

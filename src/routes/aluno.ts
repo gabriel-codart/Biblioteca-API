@@ -1,49 +1,49 @@
 import { FastifyInstance } from 'fastify';
 
-import { getUsers, getUserById, createUser, updateUser, deleteUser } from '../controllers/aluno.ts';
+import { getAlunos, getAlunoById, createAluno, updateAluno, deleteAluno } from '../controllers/aluno.ts';
 
-export default async function usersRoutes(server: FastifyInstance) {
-  server.get('/users', {
+export default async function alunoRoutes(server: FastifyInstance) {
+  server.get('/alunos', {
     schema: {
-      description: 'Get all Users',
-      tags: ['Users'],
+      description: 'Get all Alunos',
+      tags: ['Alunos'],
     }
-  }, getUsers);
+  }, getAlunos);
 
-  server.get('/users/:id', {
+  server.get('/alunos/:id', {
     schema: {
-      description: 'Get User by ID',
-      tags: ['Users'],
+      description: 'Get Aluno by ID',
+      tags: ['Alunos'],
     }
-  }, getUserById);
+  }, getAlunoById);
 
-  server.post('/users', {
+  server.post('/alunos', {
     schema: {
-      description: 'Create User',
-      tags: ['Users'],
+      description: 'Create Aluno',
+      tags: ['Alunos'],
       body: {
         type: 'object',
         properties: {
-          name: { type: 'string' },
-          email: { type: 'string' },
-          password: { type: 'string' }
+          matricula: { type: 'string' },
+          nome: { type: 'string' },
+          email: { type: 'string' }
         },
-        required: ['name', 'email', 'password']
+        required: ['matricula', 'nome', 'email']
       }
     }
-  }, createUser);
+  }, createAluno);
 
-  server.put('/users/:id', {
+  server.put('/alunos/:id', {
     schema: {
-      description: 'Update User',
-      tags: ['Users'],
+      description: 'Update Aluno',
+      tags: ['Alunos'],
     }
-  }, updateUser);
+  }, updateAluno);
 
-  server.delete('/users/:id', {
+  server.delete('/alunos/:id', {
     schema: {
-      description: 'Delete User',
-      tags: ['Users'],
+      description: 'Delete Aluno',
+      tags: ['Alunos'],
     }
-  }, deleteUser);
+  }, deleteAluno);
 }
