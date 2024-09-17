@@ -32,6 +32,7 @@ model Emprestimo {
   livroId   Int
   dataInicio DateTime
   dataFim   DateTime
+  dataDevolucao DateTime?
   atrasado  Boolean @default(false)
   aluno     Aluno @relation(fields: [alunoId], references: [id])
   livro     Livro @relation(fields: [livroId], references: [id])
@@ -41,7 +42,6 @@ model Emprestimo {
 model Atraso {
   id             Int    @id @default(autoincrement())
   emprestimoId   Int
-  dataDevolucao  DateTime
   valor          Float
   pago           Boolean @default(false)
   emprestimo     Emprestimo @relation(fields: [emprestimoId], references: [id])
