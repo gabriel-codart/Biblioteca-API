@@ -1,6 +1,6 @@
-# Fastify API
+# Biblioteca - API
 
-Este é um template para criar APIs utilizando Fastify com TypeScript. Ele já vem configurado com autoload de rotas, documentação Swagger e reinicialização automática usando `tsx`.
+Este projeto é uma API para um sistema de gerenciamento de uma biblioteca, desenvolvido com Fastify, TypeScript, SQLite e Prisma. Ele permite gerenciar alunos, livros, empréstimos e atrasos. O sistema inclui funcionalidades como registro de empréstimos, devoluções e cálculo de multas por atraso.
 
 ## Pré-requisitos
 
@@ -14,12 +14,22 @@ Este é um template para criar APIs utilizando Fastify com TypeScript. Ele já v
     ```bash
     npm install
 
-2. Inicie o servidor:
+2. Configure o banco de dados:
+
+    ```bash
+    npm prisma generate
+    ```
+    
+    ```bash
+    npx prisma migrate dev
+    ```
+
+3. Inicie o servidor:
 
     ```bash
     npm run dev
 
-O servidor será iniciado em http://localhost:2020 e a documentação Swagger estará disponível em http://localhost:2020/docs.
+O servidor será iniciado em _http://localhost:2020_ e a documentação Swagger estará disponível em _http://localhost:2020/docs_.
 
 ## Estrutura do Projeto
 
