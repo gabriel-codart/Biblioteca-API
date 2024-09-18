@@ -1,4 +1,5 @@
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
@@ -47,6 +48,11 @@ server.register(fastifySwaggerUi, {
 server.register(autoload, {
     dir: routesDir,
     options: { prefix: '/api' }
+});
+
+// Cors
+server.register(cors, {
+  origin: true
 });
 
 server.listen({ port: PORT }, (err, address) => {

@@ -56,7 +56,7 @@ export default async function emprestimoRoutes(server: FastifyInstance) {
   server.put('/emprestimos/:id/atraso/finalizar', {
     schema: {
       description: 'Finaliza o Atraso relacionado ao Emprestimo',
-      tags: ['Atrasos'],
+      tags: ['Emprestimos'],
     }
   }, finalizarAtraso);
 
