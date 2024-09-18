@@ -12,6 +12,9 @@ export const getEmprestimos = async (request: FastifyRequest, reply: FastifyRepl
       livro: true,  // Inclui o livro relacionado ao empréstimo
       atrasos: true,  // Inclui os atrasos relacionados ao empréstimo
     },
+    orderBy: {
+      id: 'desc'
+    }
   });
   reply.send({ emprestimos });
 };
